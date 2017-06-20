@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="board">
+	<select id="list" resultType="com.javalec.twice_fan.model.board.dto.BoardVO">
+		select bno,title,content,writer,viewcnt,b.regdate 
+		from tbl_board b,tbl_member m 
+		where b.writer = m.u_name
+	</select>
+	
+	<insert id="write">
+	insert into tbl_board(bno,title,content,writer)
+		values (seq_board.nextval,#{title},#{content},#{writer})
+	</insert>
+	
+	<select id="view" resultType="com.javalec.twice_fan.model.board.dto.BoardVO">
+		select * from tbl_board where bno=#{bno}
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
